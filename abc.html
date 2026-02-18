@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DC Studios Museum - Quest 3S</title>
+    <meta name="description" content="DC Studios Museum in WebXR">
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-teleport-controls@0.3.1/dist/aframe-teleport-controls.min.js"></script>
+  </head>
+  <body>
+    <a-scene renderer="antialias: true; colorManagement: true;" background="color: #050505">
+      
+      <a-assets>
+        <a-mixin id="pedestal" geometry="primitive: cylinder; radius: 0.7; height: 0.1" material="color: #444"></a-mixin>
+        <a-mixin id="label" text="align: center; width: 3; color: #FFF" position="0 1.5 0"></a-mixin>
+      </a-assets>
+
+      <a-entity id="rig" position="0 0 5">
+        <a-camera id="head" look-controls wasd-controls position="0 1.6 0"></a-camera>
+        
+        <a-entity id="leftHand" 
+                  teleport-controls="cameraRig: #rig; teleportOrigin: #head; button: trigger;"
+                  meta-touch-controls="hand: left">
+        </a-entity>
+
+        <a-entity id="rightHand" 
+                  laser-controls="hand: right"
+                  raycaster="objects: .interactable"
+                  meta-touch-controls="hand: right">
+        </a-entity>
+      </a-entity>
+
+      <a-box position="0 -0.1 0" width="30" height="0.2" depth="30" material="color: #111; roughness: 0.8"></a-box> <a-sky color="#020202"></a-sky>
+
+      <a-entity position="-5 0 -5">
+        <a-entity mixin="pedestal"></a-entity>
+        <a-cone color="#111" height="2" radius-bottom="0.5" position="0 1 0"></a-cone> 
+        <a-text value="THE DARK KNIGHT" mixin="label" position="0 2.5 0"></a-text>
+        <a-light type="spot" color="#555" intensity="0.8" position="0 5 0" rotation="-90 0 0"></a-light>
+      </a-entity>
+
+      <a-entity position="0 0 -8">
+        <a-entity mixin="pedestal" material="color: #224"></a-entity>
+        <a-box color="#f00" depth="0.1" width="1" height="1" position="0 2 0" 
+               animation="property: rotation; to: 0 360 0; loop: true; dur: 5000; easing: linear">
+        </a-box>
+        <a-text value="MAN OF STEEL" mixin="label" position="0 3 0"></a-text>
+        <a-light type="point" color="#fff" intensity="1" position="0 4 0"></a-light>
+      </a-entity>
+
+      <a-entity position="5 0 -5">
+        <a-entity mixin="pedestal" material="color: #431"></a-entity>
+        <a-torus color="#FFD700" radius="0.4" tube="0.02" position="0 1.5 0" rotation="90 0 0"
+                 animation="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; dir: alternate; loop: true; dur: 2000">
+        </a-torus>
+        <a-text value="AMAZON WARRIOR" mixin="label" position="0 2.5 0"></a-text>
+      </a-entity>
+
+      <a-entity light="type: ambient; color: #222; intensity: 0.5"></a-entity>
+
+    </a-scene>
+  </body>
+</html>
